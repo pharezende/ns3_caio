@@ -14,7 +14,7 @@
 #include "ns3/network-module.h"
 #include "ns3/on-off-helper.h"
 #include "ns3/point-to-point-module.h"
-#include "futsal-auxiliary.h"
+#include "futsal-simple-scenario.h"
 
 using namespace ns3;
 
