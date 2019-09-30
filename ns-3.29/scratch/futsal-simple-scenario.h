@@ -1,8 +1,5 @@
 /*
- * futsal-auxiliary.h
- *
- *  Created on: Sep 27, 2019
- *      Author: pedro
+ * Ver /ns-3.29/manual
  */
 
 #ifndef NS_3_29_SCRATCH_FUTSAL_AUXILIARY_H_
