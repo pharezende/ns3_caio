@@ -2,6 +2,8 @@ Crei o arquivo futsal-auxiliary.h e adicionei métodos para coletar as estatíst
 
 Dentro desse arquivo:
 
+	Colocar o path do ns-3 na linha 35. 
+
 	Método GatherQoSStatistics: Computa o agregado das métricas de cada slice após o fim da execução da simulação. Para habilitá-lo, sete a flag Trace_AggregateStats como true. Nos arquivos gerados,
 	cada linha representa um slice. As linhas são ordenadas pelo identificador do slice. (ns-allinone-3.29-caio/ns-3.29/monitoring_aggregated/)
 	Por exemplo:
