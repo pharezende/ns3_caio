@@ -1,0 +1,49 @@
+Crei o arquivo futsal-auxiliary.h e adicionei métodos para coletar as estatísticas dos slices e instanciar os slices.
+
+Dentro desse arquivo:
+
+	Método GatherQoSStatistics: Computa o agregado das métricas de cada slice após o fim da execução da simulação. Para habilitá-lo, sete a flag Trace_AggregateStats como true. Nos arquivos gerados,
+	cada linha representa um slice. As linhas são ordenadas pelo identificador do slice. (ns-allinone-3.29-caio/ns-3.29/monitoring_aggregated/)
+	Por exemplo:
+	(Downlink)
+	Linha 1 - Slice 1
+	Linha 2 - Slice 2
+	.....
+
+	(UPLINK)
+	Linha 1 - Slice 11
+	Linha 2 - Slice 12
+
+
+
+	Método GatherQoSStatistics: Computa as métricas de cada slice em cada segundo da simulação. 
+		Caso a flag Trace_MonitoringPerSecond esteja setada como true, as métricas serão salvas em apenas um arquivo. (/home/pedro/Documents/ns-allinone-3.29-caio/ns-3.29/monitoring_per_second/ trace_dinamico_rbg_1_10)
+
+		Caso a flag Trace_MonitoringPerSecond esteja setada como true, as métricas serão salvas em diferentes arquivos. Nestes arquivos, cada coluna representa um instante do tempo, o qual começa no tempo 0. (/home/pedro/Documents/ns-allinone-3.29-caio/ns-3.29/monitoring_per_second/X), onde X = throughput, list_packets, jitter ou delay
+
+
+	Entre as Linhas 390 e 422 é definido o identificadores dos slices e suas respectivas prioridades.
+
+
+Arquivo futsal-simple-scenario.cc
+
+	Tudo em que está entre o trecho abaixo foi adicionado por mim
+	//##############@Pedro##################
+
+	//######################################
+
+
+	Linhas 322 e 323:
+	Flag DYNAMICSLICING = True: slicing dinâmico
+	Flag DYNAMICSLICING = False: slicing estático
+
+	Flag RBGGRANULARITY = True: Mais de 1 slice por subframe
+	Flag RBGGRANULARITY = False: Apenas 1 slice por subframe
+
+
+	O ideal é que essas duas flags acima mais a seed sejam entradas como argumentos do programa
+
+	As matrizes de alocação estão definidas em ns-allinone-3.29-caio/ns-3.29/matrix_slicing_definition
+
+Antes de fazer a compilação do ns-3, é necessário desabilitar o python com o seguinte comando:
+./waf configure --disable-python 

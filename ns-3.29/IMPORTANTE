@@ -1,0 +1,6 @@
+Essa minha versão do NS-3.29 funciona no Ubuntu 18.04.
+Necessário instalar alguns pacotes. Veja essa página: 
+https://www.nsnam.org/wiki/Installation#Ubuntu.2FDebian.2FMint
+
+Quando for acoplar no Eclipse:
+Colocar em Run As -> C/C++ Application -> Environment -> New -> Variable: LD_LIBRARY_PATH / Value: /home/pedro/ns-allinone-3.29/ns-3.29/build/lib

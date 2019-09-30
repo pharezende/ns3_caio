@@ -1,0 +1,79 @@
+Programacao
+sed -E 's/([+-]?[0-9.]+)[eE]\+?(-?)([0-9]+)/(\1*10^\2\3)/g' <<< 7.72486e-05
+echo 7.72486*10^-05 | bc -l
+
+(9 4 2 10 5 6 2)
+20% -> 38
+
+(17 8 5 20 9 12 5)
+40% → 76 
+
+(27 12 6 30 15 18 6 )
+60% = 114
+
+(35 16 8 41 20 24 8)
+80% = 152
+
+(45 22 9 50 25 30 9) → (23%) (11%) (5%) (27%) (13%) (16%) (5%)
+100% → Total = 190
+
+
+Slices Downlink
+PED			% Subframes
+	1 - VoIP ---- 25%
+	2 - FTP  ---- 10%
+
+VEIC
+	3 - HTTP ----- 10%
+	4 - VoIP  --- 15%
+	5 - Video --- 40%
+
+Slices Uplink
+PED
+	11 - VoIP  --- 25%
+	12 - FTP ACK --- 10%
+CIC
+	13 - Video --- 20%
+
+VEIC
+	14 - HTTP ACK --- 10%
+	15 - VoIP  --- 15%
+
+SEMAFORO
+	16 - Video  --- 20%
+
+
+
+
+Montagem Atual
+
+30 - VoIP
+10 - FTP
+30 - HTTP
+30 - VoIP
+20 - Video
+15 - Video
+15 - Video
+
+
+Seguindo a regra acima
+Total Downlink - 250 (10 * 25)
+1 --- 63
+2 --- 25
+3 --- 25
+4 --- 37
+5 --- 100
+
+./waf --run "scratch/exemplo_lte  --tipoAlocacao='estatico' --granularidade='null' --share_option='null' --monitoring='monitoring' --split_monitoring='null' --simTime=120 --nbOfUes='40' --nbOfUes2='10' --nbOfUes3='30' --nbOfUes4='40' --nbOfUes5='30' --nbOfUes6='5' --nbOfUes7='5' --seed='1'" &
+
+./waf --run "scratch/exemplo_lte  --tipoAlocacao='estatico' --granularidade='rbg' --share_option='null' --monitoring='monitoring' --split_monitoring='null' --simTime=120 --nbOfUes='40' --nbOfUes2='10' --nbOfUes3='30' --nbOfUes4='40' --nbOfUes5='30' --nbOfUes6='5' --nbOfUes7='5' --seed='1'" &
+
+./waf --run "scratch/exemplo_lte  --tipoAlocacao='dinamico' --granularidade='null' --share_option='null' --monitoring='monitoring' --split_monitoring='null' --simTime=120 --nbOfUes='40' --nbOfUes2='10' --nbOfUes3='30' --nbOfUes4='40' --nbOfUes5='30' --nbOfUes6='5' --nbOfUes7='5' --seed='1'" &
+
+./waf --run "scratch/exemplo_lte  --tipoAlocacao='dinamico' --granularidade='rbg' --share_option='null' --monitoring='monitoring' --split_monitoring='null' --simTime=120 --nbOfUes='40' --nbOfUes2='10' --nbOfUes3='30' --nbOfUes4='40' --nbOfUes5='30' --nbOfUes6='5' --nbOfUes7='5' --seed='1'" &
+
+
+
+
+
+
