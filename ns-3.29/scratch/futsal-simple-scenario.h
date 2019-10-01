@@ -472,7 +472,7 @@ void slicing(NetDeviceContainer enbLteDevs, bool DYNAMICSLICING,
 
 	downlinkOrchestrator->SendSlicingMatrix(enodebID, "downlink",
 			nbRBGsSubframeDownlink,
-			"ns-3.29/matrix_slicing_definition/downlinkMatrix20MHz");
+			defaultPath + "ns-3.29/matrix_slicing_definition/downlinkMatrix20MHz");
 	downlinkOrchestrator->SendSlices(enodebID);
 
 	//Fazer alocação dos RBs por Frame. Uplink
@@ -516,7 +516,7 @@ void slicing(NetDeviceContainer enbLteDevs, bool DYNAMICSLICING,
 
 	uplinkSliceOrchestrator->SendSlicingMatrix(enodebID, "uplink",
 			nbRBGsSubframeUplink,
-			"ns-3.29/matrix_slicing_definition/uplinkMatrix20MHz");
+			defaultPath + "ns-3.29/matrix_slicing_definition/uplinkMatrix20MHz");
 
 	uplinkSliceOrchestrator->SendSlices(enodebID);
 }

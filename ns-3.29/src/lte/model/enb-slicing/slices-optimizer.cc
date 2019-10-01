@@ -504,7 +504,7 @@ void SlicesOptimizer::SetFirstSlice(int sliceID){
 }
 
 void SlicesOptimizer::SetNumberOfUEs(size_t nbUEs){
-	m_NumberOfUEs = nbUEs;
+	m_NumberOfUEs = nbUEs; //Pode tirar...
 }
 
 size_t SlicesOptimizer::GetNumberOfUEs(){

@@ -293,7 +293,7 @@ int main(int argc, char *argv[]) {
 	double courtMaxY = 35;
 
 	// initialize number of spectators
-	int spectators = 5;
+	int spectators = 4;
 
 
 	// initialize traces storage file
@@ -302,7 +302,7 @@ int main(int argc, char *argv[]) {
 	std::string flowPath = defaultPath+"metrics/futsal-simple-scenario-flow.xml";
 
 	// initialize simulation properties
-	int simTime = 10000;
+	int simTime = 5000;
 	bool enableTraces = false;
 
 	//Adicionei
