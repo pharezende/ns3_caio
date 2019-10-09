@@ -108,25 +108,27 @@ void GatherQoSStatistics(FlowMonitorHelper* fmhelper, Ptr<FlowMonitor> flowMon, 
 		Ipv4FlowClassifier::FiveTuple fiveTuple = classing->FindFlow (flowID);
 		uint16_t sliceID = fiveTuple.sliceNumber;
 		struct qosmetricsaggregated qosStats;
-		if(sliceIDToStats.count(sliceID) == 0){
-			qosStats.throughput = 0;
-			qosStats.delay = 0;
-			qosStats.jitter = 0;
-			qosStats.packetsDropped = 0;
-			qosStats.counter = 0;
-			qosStats.txPackets = 0;
+		if((stats->second.rxBytes) > 0){
+			if(sliceIDToStats.count(sliceID) == 0){
+				qosStats.throughput = 0;
+				qosStats.delay = 0;
+				qosStats.jitter = 0;
+				qosStats.packetsDropped = 0;
+				qosStats.counter = 0;
+				qosStats.txPackets = 0;
+				sliceIDToStats[sliceID] = qosStats;
+			}
+
+			qosStats = sliceIDToStats[sliceID];
+			qosStats.delay += stats->second.delaySUM.GetNanoSeconds() / stats->second.rxPackets;
+			qosStats.jitter += stats->second.jitterSUM.GetNanoSeconds() / stats->second.rxPackets;
+			Time difference = Time::FromInteger ((slicesIDToTimeDuration[sliceID]), Time::S) - stats->second.timeFirstTxPacket;
+			qosStats.throughput += ((8.0*stats->second.rxBytes)/ 1000) / (1.0*difference.GetMilliSeconds() / 1000); //Kbits
+			qosStats.packetsDropped += stats->second.lostPackets;
+			qosStats.txPackets += stats->second.txPackets;
+			qosStats.counter++;
 			sliceIDToStats[sliceID] = qosStats;
 		}
-
-		qosStats = sliceIDToStats[sliceID];
-		qosStats.delay += stats->second.delaySUM.GetNanoSeconds() / stats->second.rxPackets;
-		qosStats.jitter += stats->second.jitterSUM.GetNanoSeconds() / stats->second.rxPackets;
-		Time difference = Time::FromInteger ((slicesIDToTimeDuration[sliceID]), Time::S) - stats->second.timeFirstTxPacket;
-		qosStats.throughput += ((8.0*stats->second.rxBytes)/ 1000) / (1.0*difference.GetMilliSeconds() / 1000); //Kbits
-		qosStats.packetsDropped += stats->second.lostPackets;
-		qosStats.txPackets += stats->second.txPackets;
-		qosStats.counter++;
-		sliceIDToStats[sliceID] = qosStats;
 	}
 
 	std::ofstream outfileMonitoringDownlinkThroughputTrace(defaultPath+"ns-3.29/monitoring_aggregated/throughput/downlink_trace_"+finalDest,
